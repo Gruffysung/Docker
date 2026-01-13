@@ -173,7 +173,7 @@ install_docker_apt() {
   log "Installing Docker via APT (official Docker repo)..."
 
   apt update -y
-  apt install -y ca-certificates curl gnupg lsb-release
+  apt install -y openssl ca-certificates curl gnupg lsb-release
 
   install -m 0755 -d /etc/apt/keyrings
   curl -fsSL https://download.docker.com/linux/${OS_ID}/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -246,9 +246,9 @@ verify_docker() {
 main() {
   need_root
   detect_os
-  detect_selinux
+  #detect_selinux
   enable_kernel_modules_for_docker
-  fix_firewalld_backend_if_needed
+  #fix_firewalld_backend_if_needed
   install_docker_repo
   add_user_to_docker_group
   verify_docker
